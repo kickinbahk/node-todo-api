@@ -26,9 +26,9 @@ app.get('/todos', function(req, res) {
 app.get('/todos/:id', function(req, res) {
     var todoId = Number(req.params.id);
     var foundId;
-    for(var item of todos) {
-        if (item.id === todoId) {
-            foundId = item;
+    for(var todo of todos) {
+        if (todo.id === todoId) {
+            foundId = todo;
         }
     }
     if (foundId) {
