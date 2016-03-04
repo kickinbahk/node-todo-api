@@ -1,4 +1,4 @@
-{
+n{
   "name": "todo-api",
   "version": "1.0.0",
   "description": "",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "standard": "^6.0.7"
   }
 }

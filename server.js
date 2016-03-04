@@ -1,19 +1,19 @@
-var express = require("express");
+var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 3000;
 var todos = [];
 var todoNextId = 1;
 
-app.get('/', function(req,res) {
-  res.send("Todo API Root");
+app.get('/', function (req, res) {
+  res.send('Todo API Root');
 });
 
-app.get('/todos', function(req, res) {
+app.get('/todos', function (req, res) {
   res.json(todos);
 });
 
-app.get('/todos/:id', function(req, res) {
-  var todoId = Number (req.params.id);
+app.get('/todos/:id', function (req, res) {
+  var todoId = Number(req.params.id);
   var foundId;
   for (var todo of todos) {
     if (todo.id === todoId) {
@@ -27,11 +27,11 @@ app.get('/todos/:id', function(req, res) {
   }
 });
 
-app.post ('/todos/', function (req, res) {
+app.post('/todos/', function (req, res) {
 
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`Express listening on port ${PORT}...`);
 });
-   
+
