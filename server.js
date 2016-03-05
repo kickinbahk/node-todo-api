@@ -40,6 +40,18 @@ app.post('/todos/', function (req, res) {
   res.json(body)
 })
 
+app.delete('/todos/:id', function (req, res) {
+  var todoId = Number(req.params.id)
+  var foundId = _.findWhere(todos, {id: todoId})
+  if (foundId) {
+    res.status(200).send()
+    todos = _.without(todos, foundId)
+  } else {
+    res.status(400).send()
+  }
+  return todos
+})
+
 app.listen(PORT, function () {
   console.log(`Express listening on port ${PORT}...`)
 })
