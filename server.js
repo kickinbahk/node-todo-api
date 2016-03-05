@@ -59,7 +59,7 @@ app.put('/todos/:id', function (req, res) {
   if (!foundTodoById) {
     return res.status(404).send()
   }
-  if (body.hasOwnProprety('completed') && _.isBoolean(body.completed)) {
+  if (body.hasOwnProperty('completed') && _.isBoolean(body.completed)) {
     validAttributes.completed = body.completed
   } else if (body.hasOwnProperty('completed')) {
     return res.status(400).send()
