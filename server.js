@@ -70,6 +70,7 @@ app.put('/todos/:id', function (req, res) {
     return res.status(400).send()
   }
   _.extend(foundTodoById, validAttributes)
+  res.json(foundTodoById)
 })
 
 app.listen(PORT, function () {
