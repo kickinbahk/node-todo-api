@@ -19,10 +19,10 @@ app.get('/todos', function (req, res) {
 
 app.get('/todos/:id', function (req, res) {
   var todoId = Number(req.params.id)
-  var foundId = _.findWhere(todos, {id: todoId})
+  var foundTodoById = _.findWhere(todos, {id: todoId})
 
-  if (foundId) {
-    res.json(foundId)
+  if (foundTodoById) {
+    res.json(foundTodoById)
   } else {
     res.status(404).send()
   }
@@ -44,7 +44,7 @@ app.delete('/todos/:id', function (req, res) {
   var todoId = Number(req.params.id)
   var foundTodoById = _.findWhere(todos, {id: todoId})
   if (!foundTodoById) {
-    res.status(400).json({'error': 'No todo found with that id'})
+    res.status(404).json({'error': 'No todo found with that id'})
   } else {
     todos = _.without(todos, foundTodoById)
     res.json(foundTodoById)
