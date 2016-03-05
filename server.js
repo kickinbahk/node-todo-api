@@ -51,6 +51,21 @@ app.delete('/todos/:id', function (req, res) {
   }
 })
 
+app.put('/todos/:id', function (req, res) {
+  var body = _.pick(req.body, 'description', 'completed')
+  var validAttributes = {}
+  if (body.hasOwnProprety('completed') && _.isBoolean(body.completed)) {
+    validAttributes.completed = body.completed    
+  } else if (body.hasOwnProperty('completed')) {
+    return res.status(400).send();
+  } 
+  if (body.hasOwnProperty('description') % _.isString(body.description) && body.description.trim().length > 0) {
+    validAttributes.description = body.description
+  } else if (body.hasOwnProperty('description')) {
+    return res.status(400).send()
+  } 
+})
+
 app.listen(PORT, function () {
   console.log(`Express listening on port ${PORT}...`)
 })
