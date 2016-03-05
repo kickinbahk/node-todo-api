@@ -42,14 +42,13 @@ app.post('/todos/', function (req, res) {
 
 app.delete('/todos/:id', function (req, res) {
   var todoId = Number(req.params.id)
-  var foundId = _.findWhere(todos, {id: todoId})
-  if (foundId) {
-    res.status(200).send()
-    todos = _.without(todos, foundId)
+  var foundTodoById = _.findWhere(todos, {id: todoId})
+  if (!foundTodoById) {
+    res.status(400).json({'error': 'No todo found with that id'})
   } else {
-    res.status(400).send()
+    todos = _.without(todos, foundTodoById)
+    res.json(foundTodoById)
   }
-  return todos
 })
 
 app.listen(PORT, function () {
