@@ -60,14 +60,17 @@ app.post('/todos/', function (req, res) {
 
 app.delete('/todos/:id', function (req, res) {
   var todoId = Number(req.params.id)
-  var foundTodoById = _.findWhere(todos, {id: todoId})
 
-  if (!foundTodoById) {
-    res.status(404).json({'error': 'No todo found with that id'})
-  } else {
-    todos = _.without(todos, foundTodoById)
-    res.json(foundTodoById)
-  }
+  db.todo.findById(todoId).then(function (todo) {
+    if (todo) {
+      res.status(204).send()
+      return todo.destroy()
+    } else {
+      return res.status(404).json({'error': 'No todo found with that id'})
+    }
+  }, function (e) {
+    res.status(500).send()
+  })
 })
 
 app.put('/todos/:id', function (req, res) {
