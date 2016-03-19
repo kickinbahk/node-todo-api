@@ -34,6 +34,8 @@ app.get('/todos', function (req, res) {
   })
 })
 
+// TODOs
+
 app.get('/todos/:id', function (req, res) {
   var todoId = Number(req.params.id)
   db.todo.findById(todoId).then(function (todo) {
@@ -96,6 +98,18 @@ app.put('/todos/:id', function (req, res) {
     }
   }, function (e) {
     res.status(500).send()
+  })
+})
+
+// USERS
+
+app.post('/users', function (req, res) {
+  var body = _.pick(req.body, 'email', 'password')
+
+  db.user.create(body).then(function (user) {
+    res.json(user.toJSON())
+  }, function (e) {
+    res.status(400).json(e)
   })
 })
 
