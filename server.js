@@ -5,10 +5,8 @@ var db = require('./db.js')
 
 var app = express()
 var PORT = process.env.PORT || 3000
-var todos = []
 
 app.use(bodyParser.json())
-
 app.get('/', function (req, res) {
   res.send('Todo API Root')
 })
