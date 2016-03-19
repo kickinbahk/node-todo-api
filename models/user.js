@@ -52,8 +52,6 @@ module.exports = function (sequelize, DataTypes) {
               email: body.email
             }
           }).then(function (user) {
-            //  "email": "frank@example.com",
-            // "password":  "abc1321123"
             if (!user || !bcrypt.compareSync(body.password, user.get('password_hash'))) {
               return reject()
             }
