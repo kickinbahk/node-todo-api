@@ -2,6 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var _ = require('underscore')
 var db = require('./db.js')
+var bcrypt = require('bcrypt')
 
 var app = express()
 var PORT = process.env.PORT || 3000
@@ -120,7 +121,18 @@ app.post('/users/login', function (req, res) {
     return res.status(400).send()
   }
 
-  res.json(body)
+  db.user.findOne({
+    where: {
+      email: body.email
+    }
+  }).then(function (user) {
+    if (!user || !bcrypt.compareSync(body.password, user.get('password_hash'))) {
+      return res.status(401).send()
+    }
+    res.json(user.toPublicJSON())
+  }, function (e) {
+    res.status(500).send
+  })
 })
 
 db.sequelize.sync().then(function () {
